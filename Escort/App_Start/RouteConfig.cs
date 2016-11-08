@@ -13,6 +13,13 @@ namespace Escort
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute("AdminManage", "admin",
+            new { controller = "Home", action = "AdminManage" });
+            routes.MapRoute("AdminLogin", "login",
+           new { controller = "Home", action = "AdminLogin" });
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

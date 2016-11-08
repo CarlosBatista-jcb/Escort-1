@@ -1,0 +1,27 @@
+﻿html {
+    background-attachment: fixed;
+    background-color: rgba(50,50,50,1);
+    background-position: -64px;
+    background-repeat: repeat;
+    height: 100%;
+    overflow: auto;
+            font-family: "Roboto";
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.content {
+    box-sizing: border-box;
+    margin: 3.5em auto 0;
+    max-width: 480px;
+    min-width: 240px;
+    padding: 30px 35px;
+    text-align: center;
+    color:#d2cbc5;
+    background-color: #323232;
+}
+

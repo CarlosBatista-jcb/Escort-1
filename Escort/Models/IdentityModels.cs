@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace Escort.Models
 {
@@ -16,14 +17,23 @@ namespace Escort.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        // Extend more property
+        public string FullName { get; set; }
+        public DateTime LastLogin { get; set; }
+        public string Contact { get; set; }
+        public bool IsDisabled { get; set; }
+        public bool IsLocked { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("name=VipHouse", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Transaction> Transaction { get; set; }
 
         public static ApplicationDbContext Create()
         {

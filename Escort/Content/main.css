@@ -1,5 +1,5 @@
 ﻿body {
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: "Roboto,Arial,sans-serif, Helvetica Neue";
         color: #b3b3b3;
 }
  html {
@@ -17,8 +17,8 @@
             position: absolute;
         }
 @font-face {
-    font-family: 'Montserrat-UltraLight';
-    src: url('/fonts/Montserrat-UltraLight.ttf');
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }

@@ -1,0 +1,156 @@
+﻿@using Escort.Models;
+@model List<Escort.Models.AccountList>
+
+
+@{
+    ViewBag.Title = "AdminManage";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .s-icon{
+        position:absolute;
+        right:25px;
+        top:7px;
+        width:20px;
+        height:20px;
+        color:#ccc;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Account Managerment
+        <small>Add/Lock/Disable account</small>
+    </h1>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <button type="button" data-toggle="modal" data-target="#addUser" title="Add new account" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="position:relative">
+            <input style="float:right; padding-right:35px;" class="form-control" placeholder="Username, Fullname, Email" />
+            <span class="s-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+    </div>
+  
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Username</th>
+                                <th>Fullname</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Last Login</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var ind = 1;}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@ind</td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Contact</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.LastLogin.ToString("dd/MM/yyyy hh:mm")</td>
+                                    <td>
+                                        @if (item.IsDisabled)
+                                        {
+                                            <span>Disabled</span>
+                                        }
+                                        else if (item.IsLocked)
+                                        {
+                                            <span>Locked</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Active</span>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (item.IsLocked)
+                                        {
+                                            <button title="Unlock account" class="btn btn-success"><i class="fa fa-fw fa-unlock-alt" aria-hidden="true"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button title="Lock account" class="btn btn-danger"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></button>
+                                        }
+                                        @if (item.IsDisabled)
+                                        {
+                                            <button title="Enable account" class="btn btn-default"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button title="Disable account" class="btn btn-default"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></button>
+                                        }
+                                        <button title="Transaction history" class="btn btn-info"><i class="fa fa-fw fa-info" aria-hidden="true"></i></button>
+                                        <button onclick="GeneratePw('@item.Id')" title="Geranate Password" class="btn btn-warning"><i class="fa fa-key" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                ind++;
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+</section>
+
+
+<div id="addUser" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="createForm" role="form" action="/Account/Register" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-user-plus" aria-hidden="true"></i> New account</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="Fullname">Fullname <small class="text-danger">required</small></label>
+                            <input required type="text" name="Fullname" class="form-control" id="Fullname" placeholder="Fullname">
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">Email address <small class="text-danger">required</small></label>
+                            <input required type="email" class="form-control" name="Email" id="Email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="Contact">Contact <small class="text-danger">required</small></label>
+                            <input required type="text" class="form-control" name="Contact" id="Contact" placeholder="Your contact with country code">
+                            <p style="font-style:italic">Password will be generated after creating account</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script defer src="~/Scripts/admin.js" type="text/javascript"></script>

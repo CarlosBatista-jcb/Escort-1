@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Escort.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,10 @@ namespace Escort.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();
@@ -28,33 +33,35 @@ namespace Escort.Controllers
         }
 
 
-        public string GenerateOTP()
-        {
-            string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string small_alphabets = "abcdefghijklmnopqrstuvwxyz";
-            string numbers = "1234567890";
-            int length = 5; // password length
-            string pwType = "1"; //Alphanumeric
 
-            string characters = numbers;
-            if (pwType == "1")
-            {
-                characters += alphabets + small_alphabets + numbers;
-            }
-  
-            string otp = string.Empty;
-            for (int i = 0; i < length; i++)
-            {
-                string character = string.Empty;
-                do
-                {
-                    int index = new Random().Next(0, characters.Length);
-                    character = characters.ToCharArray()[index].ToString();
-                } while (otp.IndexOf(character) != -1);
-                otp += character;
-            }
-            return otp;
+        // Admin login from here
+
+        public ActionResult AdminLogin()
+        {
+            return View();
         }
+        public ActionResult AdminManage(string q , int p=1)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                List<AccountList> AccountList = db.Users.Where(t => t.Email != "haovtit@gmail.com").OrderByDescending(t => t.LastLogin).Skip(0).Take(15).Select(t => new AccountList
+                {
+                    Id = t.Id,
+                    UserName = t.UserName,
+                    LastLogin = t.LastLogin,
+                    Email = t.Email,
+                    FullName = t.FullName,
+                    Contact = t.Contact,
+                    IsDisabled = t.IsDisabled,
+                    IsLocked = t.IsLocked
+                }).ToList();
+                return View(AccountList);
+            }
+           
+        }
+
+      
+
 
     }
 }
