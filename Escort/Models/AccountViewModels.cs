@@ -7,7 +7,8 @@ namespace Escort.Models
     public class AccountList
     {
         public string Id { get; set; }
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
@@ -89,20 +90,17 @@ namespace Escort.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Fullname")]
-        public string Fullname { get; set; }
+        [Display(Name = "Firstname")]
+        public string Firstname { get; set; }
 
-        //[Required]
-        //[Display(Name = "Username")]
-        //public string Username { get; set; }
-
+        [Required]
+        [Display(Name = "Lastname")]
+        public string Lastname { get; set; }
 
         [Required]
         [EmailAddress]

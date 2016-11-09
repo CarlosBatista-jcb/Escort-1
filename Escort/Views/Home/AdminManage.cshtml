@@ -25,9 +25,10 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <button type="button" data-toggle="modal" data-target="#addUser" title="Add new account" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i></button>
+            <span id="error-text" style="display:none">@ViewBag.Error</span>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="position:relative">
-            <input style="float:right; padding-right:35px;" class="form-control" placeholder="Username, Fullname, Email" />
+            <input id="search" style="float:right; padding-right:35px;" class="form-control" placeholder="Username, Fullname, Email" />
             <span class="s-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
         </div>
     </div>
@@ -44,8 +45,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Username</th>
-                                <th>Fullname</th>
+                                <th>FirsName</th>
+                                <th>LastName</th>
                                 <th>Contact</th>
                                 <th>Email</th>
                                 <th>Last Login</th>
@@ -59,8 +60,8 @@
                             {
                                 <tr>
                                     <td>@ind</td>
-                                    <td>@item.UserName</td>
-                                    <td>@item.FullName</td>
+                                    <td>@item.FirstName</td>
+                                    <td>@item.LastName</td>
                                     <td>@item.Contact</td>
                                     <td>@item.Email</td>
                                     <td>@item.LastLogin.ToString("dd/MM/yyyy hh:mm")</td>
@@ -80,24 +81,42 @@
 
                                     </td>
                                     <td>
-                                        @if (item.IsLocked)
+
+                                        @if (!item.IsDisabled)
                                         {
-                                            <button title="Unlock account" class="btn btn-success"><i class="fa fa-fw fa-unlock-alt" aria-hidden="true"></i></button>
+                                            if (item.IsLocked)
+                                            {
+                                                <form style="display:inline-block" method="post" action="/Account/UnlockAccount?userId=@item.Id&returnUrl=@Request.Url.PathAndQuery">
+                                                    <button title="Unlock account" class="control-btn btn btn-success"><i class="fa fa-fw fa-unlock-alt" aria-hidden="true"></i></button>
+                                                </form>
+
+                                            }
+                                            else
+                                            {
+                                                <form style="display:inline-block" method="post" action="/Account/LockAccount?userId=@item.Id&returnUrl=@Request.Url.PathAndQuery">
+                                                    <button title="Lock account" class="control-btn btn btn-danger"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></button>
+                                                </form>
+
+                                            }
                                         }
-                                        else
-                                        {
-                                            <button title="Lock account" class="btn btn-danger"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></button>
-                                        }
+
+                                      
                                         @if (item.IsDisabled)
                                         {
-                                            <button title="Enable account" class="btn btn-default"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i></button>
+                                            <form style="display:inline-block" method="post" action="/Account/EnableAccount?userId=@item.Id&returnUrl=@Request.Url.PathAndQuery">
+                                                <button title="Enable account" class="control-btn btn btn-success"><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i></button>
+                                            </form>
+
                                         }
                                         else
                                         {
-                                            <button title="Disable account" class="btn btn-default"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></button>
+                                            <form style="display:inline-block" method="post" action="/Account/DisableAccount?userId=@item.Id&returnUrl=@Request.Url.PathAndQuery">
+                                                <button title="Disable account" class="control-btn btn btn-default"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></button>
+                                            </form>
+
                                         }
-                                        <button title="Transaction history" class="btn btn-info"><i class="fa fa-fw fa-info" aria-hidden="true"></i></button>
-                                        <button onclick="GeneratePw('@item.Id')" title="Geranate Password" class="btn btn-warning"><i class="fa fa-key" aria-hidden="true"></i></button>
+                                        <button title="Transaction history" class="control-btn btn btn-info"><i class="fa fa-fw fa-info" aria-hidden="true"></i></button>
+                                        <button onclick="GeneratePw('@item.Id', '@item.UserName')" title="Geranate Password" class="control-btn btn btn-warning"><i class="fa fa-key" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
                                 ind++;
@@ -128,8 +147,17 @@
                 <div class="modal-body">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="Fullname">Fullname <small class="text-danger">required</small></label>
-                            <input required type="text" name="Fullname" class="form-control" id="Fullname" placeholder="Fullname">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label for="Firstname">FirstName <small class="text-danger">required</small></label>
+                                    <input required type="text" name="Firstname" class="form-control" id="Firstname" placeholder="Firstname">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="Lastname">FirstName <small class="text-danger">required</small></label>
+                                    <input required type="text" name="Lastname" class="form-control" id="Lastname" placeholder="Lastname">
+                                </div>
+                            </div>
+                         
                         </div>
                         <div class="form-group">
                             <label for="Email">Email address <small class="text-danger">required</small></label>
@@ -151,6 +179,35 @@
         </div>
     </div>
 </div>
+<div id="alertPw" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-body">
+                    <div class="box-body" style="text-align:center">
+                       <p>New password of <span id="name"></span> is: <strong><span id="pw"></span></strong></p>
+                        <p style="font-style:italic">Note: If you don't remember it, you have to re-generate new password again.</p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align:center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+ 
+        </div>
+    </div>
+</div>
+<div id="alertError" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box-body" style="text-align:center">
+                    <p class="text-danger"><strong>@ViewBag.Error</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
 
-
+        </div>
+    </div>
+</div>
 <script defer src="~/Scripts/admin.js" type="text/javascript"></script>

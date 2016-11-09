@@ -19,7 +19,10 @@ namespace Escort.Models
         }
 
         // Extend more property
-        public string FullName { get; set; }
+        //public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public DateTime LastLogin { get; set; }
         public string Contact { get; set; }
         public bool IsDisabled { get; set; }

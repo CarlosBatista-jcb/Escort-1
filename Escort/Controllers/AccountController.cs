@@ -73,21 +73,39 @@ namespace Escort.Controllers
                 return View(model);
             }
 
+            if (MyHelper.adminEmail.Contains(model.Email))
+            {
+                // Do not allow admin sign in here
+                return Redirect("/sign-in");
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    // Change password after login successful
+                    string pw = MyHelper.GenerateOTP();
+                    var user = UserManager.FindByEmail(model.Email);
+                    if (user == null)
+                    {
+                        return Redirect("/sign-in");
+                    }
+                    string code = UserManager.GeneratePasswordResetToken(user.Id);
+                    var result2 = UserManager.ResetPassword(user.Id, code, pw);
+
+                    if (result2.Succeeded)
+                    {
+                        return Redirect("/");
+                    }else
+                    {
+                        return Redirect("/sign-in");
+                    }
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    //Error
+                    return Redirect("/sign-in");
             }
         }
 
@@ -199,7 +217,8 @@ namespace Escort.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    FullName = model.Fullname,
+                    FirstName = model.Firstname,
+                    LastName = model.Lastname,
                     Contact = model.Contact,
                     LastLogin = DateTime.Now
                 };
@@ -220,7 +239,9 @@ namespace Escort.Controllers
 
                     return RedirectToAction("AdminManage", "Home");
                 }
-                AddErrors(result);
+                // Error
+                //AddErrors(result);
+                TempData["Error"] = model.Email + " has been already taken, please try another";
             }
 
             // If we got this far, something failed, redisplay form
@@ -297,7 +318,7 @@ namespace Escort.Controllers
         public string ReGeneratePassword(string userId)
         {
             string pw = MyHelper.GenerateOTP();
-            var user = UserManager.FindByIdAsync(userId);
+            var user = UserManager.FindById(userId);
             if (user == null)
             {
                 return "Error";
@@ -314,6 +335,92 @@ namespace Escort.Controllers
 
             return "Error";
         }
+
+        [HttpPost]
+        public ActionResult LockAccount(string userId, string returnUrl)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = UserManager.FindById(userId);
+                if (user == null)
+                {
+                    // Error
+                    return Redirect(returnUrl);
+                }
+                user.IsLocked = true;
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            // Error
+            return Redirect(returnUrl);
+        }
+        [HttpPost]
+        public ActionResult UnlockAccount(string userId, string returnUrl)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = UserManager.FindById(userId);
+                if (user == null)
+                {
+                    // Error
+                    return Redirect(returnUrl);
+                }
+                user.IsLocked = false;
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            // Error
+            return Redirect(returnUrl);
+        }
+        [HttpPost]
+        public ActionResult DisableAccount(string userId, string returnUrl)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = UserManager.FindById(userId);
+                if (user == null)
+                {
+                    // Error
+                    return Redirect(returnUrl);
+                }
+                user.IsDisabled = true;
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            // Error
+            return Redirect(returnUrl);
+        }
+        [HttpPost]
+        public ActionResult EnableAccount(string userId, string returnUrl)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = UserManager.FindById(userId);
+                if (user == null)
+                {
+                    // Error
+                    return Redirect(returnUrl);
+                }
+                user.IsDisabled = false;
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+            // Error
+            return Redirect(returnUrl);
+        }
+
 
 
         //

@@ -11,6 +11,38 @@ namespace Escort.Models
     public class MyHelper
     {
 
+        public static List<string> adminEmail = new List<string>() {"haovtit@gmail.com", "abcgfdh@gmail.com"};
+
+        public static bool IsAdmin(string userId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Users.Where(t => t.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    if (adminEmail.Contains(user.Email))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static string GetFirstName(string userId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Users.Where(t => t.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    return user.FirstName;
+                }
+            }
+            return "Error";
+        }
+
+
         public static string GetEmail(string userId)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())

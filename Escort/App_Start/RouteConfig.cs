@@ -14,6 +14,11 @@ namespace Escort
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
+            routes.MapRoute("LoginPage", "sign-in",
+        new { controller = "Home", action = "LoginPage" });
+
+
+
             routes.MapRoute("AdminManage", "admin",
             new { controller = "Home", action = "AdminManage" });
             routes.MapRoute("AdminLogin", "login",

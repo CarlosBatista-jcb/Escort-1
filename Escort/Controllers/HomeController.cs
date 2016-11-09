@@ -42,20 +42,46 @@ namespace Escort.Controllers
         }
         public ActionResult AdminManage(string q , int p=1)
         {
+            ViewBag.Error = TempData.ContainsKey("Error")? TempData["Error"]: "" ;
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                List<AccountList> AccountList = db.Users.Where(t => t.Email != "haovtit@gmail.com").OrderByDescending(t => t.LastLogin).Skip(0).Take(15).Select(t => new AccountList
+                if (!String.IsNullOrEmpty(q))
                 {
-                    Id = t.Id,
-                    UserName = t.UserName,
-                    LastLogin = t.LastLogin,
-                    Email = t.Email,
-                    FullName = t.FullName,
-                    Contact = t.Contact,
-                    IsDisabled = t.IsDisabled,
-                    IsLocked = t.IsLocked
-                }).ToList();
-                return View(AccountList);
+                    List<AccountList> AccountList = db.Users.Where(t => !MyHelper.adminEmail.Contains(t.Email) &&
+                       (t.Email.Contains(q) || (t.FirstName.Contains(q) || (t.LastName.Contains(q)) || (t.Contact.Contains(q))))
+                       ).OrderByDescending(t => t.LastLogin).Skip(0).Take(15).Select(t => new AccountList
+                       {
+                           Id = t.Id,
+                           UserName = t.UserName,
+                           LastLogin = t.LastLogin,
+                           Email = t.Email,
+                           FirstName = t.FirstName,
+                           LastName = t.LastName,
+                           Contact = t.Contact,
+                           IsDisabled = t.IsDisabled,
+                           IsLocked = t.IsLocked
+                       }).ToList();
+                            return View(AccountList);
+                }else
+                {
+                    List<AccountList> AccountList = db.Users.Where(t => !MyHelper.adminEmail.Contains(t.Email)).OrderByDescending(t => t.LastLogin).Skip(0).Take(15).Select(t => new AccountList
+                       {
+                           Id = t.Id,
+                           UserName = t.UserName,
+                           LastLogin = t.LastLogin,
+                           Email = t.Email,
+                           FirstName = t.FirstName,
+                           LastName = t.LastName,
+                           Contact = t.Contact,
+                           IsDisabled = t.IsDisabled,
+                           IsLocked = t.IsLocked
+                       }).ToList();
+                    return View(AccountList);
+                }
+
+
+               
             }
            
         }

@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @using Escort.Models
 
-@if (Request.IsAuthenticated && MyHelper.GetEmail(User.Identity.GetUserId()) == "haovtit@gmail.com")
+@if (Request.IsAuthenticated && MyHelper.IsAdmin(User.Identity.GetUserId()))
 {
 }else
 {
@@ -46,14 +46,11 @@
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg"><b>VIP</b> House</span>
                 </a>
-                <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            
-                            <!-- Control Sidebar Toggle Button -->
                             <li>
-                                <a href="#" data-toggle="control-sidebar">Sign out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -95,7 +92,10 @@
     </div>
 
 
+    <form id="logoutForm" action="/Account/LogOff" method="post" style="display:none">
+        @Html.AntiForgeryToken()
 
+    </form>
 
 
     <!-- jQuery 2.1.4 -->

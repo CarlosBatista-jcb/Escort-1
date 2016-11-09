@@ -187,6 +187,14 @@
     <Compile Include="Migrations\201611080623385_UpdateTbl.Designer.cs">
       <DependentUpon>201611080623385_UpdateTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611090815538_addPropName.cs" />
+    <Compile Include="Migrations\201611090815538_addPropName.Designer.cs">
+      <DependentUpon>201611090815538_addPropName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611090820250_removeFullName.cs" />
+    <Compile Include="Migrations\201611090820250_removeFullName.Designer.cs">
+      <DependentUpon>201611090820250_removeFullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -339,6 +347,7 @@
     <Content Include="assets\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="assets\font-awesome\scss\_stacked.scss" />
     <Content Include="assets\font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\Escort.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\camera.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -422,6 +431,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611080623385_UpdateTbl.resx">
       <DependentUpon>201611080623385_UpdateTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611090815538_addPropName.resx">
+      <DependentUpon>201611090815538_addPropName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611090820250_removeFullName.resx">
+      <DependentUpon>201611090820250_removeFullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
