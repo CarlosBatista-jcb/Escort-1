@@ -4,14 +4,7 @@
         $(".mb-only").remove();
     }
     var w = $(window).width() * 0.5 - 20;
-    //if(w > 300){
-    //    $(".control-w").css("width", 300);
-    //} else {
-    //    $(".control-w").css("width", $(window).width() * 0.5 - 20);
-    //}
-   
 
-    //$(".full-page").css("height", $(window).height());
     $(".header-content").css("top", $(window).height()*0.3);
 
     $(".height75").css("height", $(window).height() * 0.7);

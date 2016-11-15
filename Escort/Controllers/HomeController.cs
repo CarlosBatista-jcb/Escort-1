@@ -32,6 +32,14 @@ namespace Escort.Controllers
             return View();
         }
 
+        public ActionResult Angels()
+        {
+            return View();
+        }
+        public ActionResult AngelInfor()
+        {
+            return View();
+        }
 
 
         // Admin login from here

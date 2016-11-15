@@ -255,6 +255,7 @@
     <Content Include="imgs\angel.jpg" />
     <Content Include="imgs\bachelor-Sexy-Gambling-Woman-63181972.jpg" />
     <Content Include="imgs\bathroom.jpg" />
+    <Content Include="imgs\botbanner1.png" />
     <Content Include="imgs\camera-loader.gif" />
     <Content Include="imgs\camera_skins.png" />
     <Content Include="imgs\casino.jpg" />
@@ -263,6 +264,7 @@
     <Content Include="imgs\dam-tham-quyen-ru-tua-giot-ruou-vang-nang-lam-say-long-nguoi_766.jpg" />
     <Content Include="imgs\escort_logo.png" />
     <Content Include="imgs\gambling-girl-bitcoin-759x500.jpg" />
+    <Content Include="imgs\girl.png" />
     <Content Include="imgs\hoboi.jpg" />
     <Content Include="imgs\limo.jpg" />
     <Content Include="imgs\maxresdefault.jpg" />
@@ -272,11 +274,16 @@
     <Content Include="imgs\partylimo.jpg" />
     <Content Include="imgs\pink-aston-martin-and-bikini-babe-for-the-chinese-james-bond_6.jpg" />
     <Content Include="imgs\presedential-bedroom.jpg" />
+    <Content Include="imgs\sample.png" />
+    <Content Include="imgs\samplegirl.png" />
     <Content Include="imgs\sea.jpg" />
     <Content Include="imgs\searchnowtab.jpg" />
     <Content Include="imgs\searchnowtab2.jpg" />
     <Content Include="imgs\searchnowtab3.jpg" />
+    <Content Include="imgs\slide1.png" />
     <Content Include="imgs\St.-Petersburg-Bachelorette-Party-Bus.jpg" />
+    <Content Include="imgs\topbanner1.png" />
+    <Content Include="imgs\topbanner2.jpg" />
     <Content Include="imgs\VIP-aviation_logo_portf.jpg" />
     <Content Include="imgs\vip1.png" />
     <Content Include="imgs\vip_1.png" />
@@ -406,6 +413,8 @@
     <Content Include="Views\Home\AdminLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Home\AdminManage.cshtml" />
+    <Content Include="Views\Home\Angels.cshtml" />
+    <Content Include="Views\Home\AngelInfor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
