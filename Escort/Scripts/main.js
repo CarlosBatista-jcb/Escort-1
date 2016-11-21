@@ -42,7 +42,7 @@
 	
     //$('#fullpage').fullpage();
 	$("#page1").css("height", $(window).height());
-	$("#page4").css("height", $(window).height());
+	//$("#page4").css("height", $(window).height());
 	
 
 
@@ -62,4 +62,3 @@ $('#camera_wrap_1').camera({
 });
 
 
-	

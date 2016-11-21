@@ -237,6 +237,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\nstslider.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\skins\skin-blue.css" />
     <Content Include="dist\js\app.min.js" />
@@ -354,6 +355,7 @@
     <Content Include="assets\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="assets\font-awesome\scss\_stacked.scss" />
     <Content Include="assets\font-awesome\scss\_variables.scss" />
+    <Content Include="fonts\conthrax-sb.ttf" />
     <None Include="Properties\PublishProfiles\Escort.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\camera.js" />
@@ -369,8 +371,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.vide.min.js" />
+    <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\list.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\jquery.nstSlider.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

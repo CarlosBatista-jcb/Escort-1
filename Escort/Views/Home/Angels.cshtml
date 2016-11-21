@@ -5,10 +5,13 @@
 }
 
 
+<link rel="stylesheet" href="~/Content/nstslider.css" />
+
+
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="row">
         <div class="top-banner">
-            <h1>LET THE SEXIEST & NAUTIEST ANGELS BE THE HOST</h1>
+            <h1 class="conthrax-font">LET THE SEXIEST & NAUTIEST ANGELS BE THE HOST</h1>
         </div>
     </div>
 </div>
@@ -19,6 +22,119 @@
         <div class="container">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
+                    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mycol" style="padding-bottom:10px">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button onclick="ShowFilter('age', this)" type="button" class="btn btn-default">Age</button>
+                            <button onclick="ShowFilter('height', this)" type="button" class="btn btn-default">Height</button>
+                            <button type="button" class="btn btn-default">Language</button>
+                            <button type="button" class="btn btn-default">Measurement</button>
+                            <button type="button" class="btn btn-default">Ethnicity</button>
+                            <button type="button" class="btn btn-default">Price</button>
+                        </div>
+                    </div>*@     
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mycol" style="padding-bottom:10px; text-align:right">
+                        <a href="javascript:void(0)" onclick="OpenFilter()" style="font-size:16px;color:#5a5a5a">Advance Filter</a>
+                    </div>
+                    <div id="filter" style="display:none" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mycol">
+                        <div class="filter-container">
+                            <div class="text-filter">Age</div>
+                            <div class="filter">
+                                <div id="age-range" class="nstSlider" data-range_min="18" data-range_max="40"
+                                     data-cur_min="18" data-cur_max="40">
+                                    <div class="bar"></div>
+                                    <div class="leftGrip"></div>
+                                    <div class="rightGrip"></div>
+                                </div>
+                                <div class="leftLabel"></div>
+                                <div class="rightLabel"></div>
+                            </div>
+                        </div>
+                        <div class="filter-container">
+                            <div class="text-filter">Height (cm)</div>
+                            <div class="filter">
+                                <div id="height-range" class="nstSlider" data-range_min="150" data-range_max="190"
+                                     data-cur_min="150" data-cur_max="190">
+                                    <div class="bar"></div>
+                                    <div class="leftGrip"></div>
+                                    <div class="rightGrip"></div>
+                                </div>
+                                <div class="leftLabel"></div>
+                                <div class="rightLabel"></div>
+                            </div>
+                        </div>          
+                        <div class="filter-container">
+                            <div class="text-filter">Language</div>
+                            <div class="filter">
+                               <select>
+                                   <option>Language</option>
+                                   <option>English</option>
+                                   <option>VietNamese</option>
+                               </select>
+                            </div>
+                        </div>    
+                        <div class="filter-container">
+                            <div class="text-filter">Measurement (cm)</div>
+                            <div class="filter">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="indicator-contain">
+                                                <span class="indicator">B</span>
+                                                <input class="ind-value" maxlength="3" value="60" /> -
+                                                <input class="ind-value" maxlength="3" value="120" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="indicator-contain">
+                                                <span class="indicator">W</span>
+                                                <input class="ind-value" maxlength="3" value="50" /> -
+                                                <input class="ind-value" maxlength="3" value="80" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="indicator-contain">
+                                                <span class="indicator">H</span>
+                                                <input class="ind-value" maxlength="3" value="60" /> -
+                                                <input class="ind-value" maxlength="3" value="120" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>  
+                        <div class="filter-container">
+                            <div class="text-filter">Ethnicity</div>
+                            <div class="filter">
+                                <select>
+                                    <option>Ethnicity</option>
+                                    <option>VietName</option>
+                                    <option>Singapore</option>
+                                </select>
+                            </div>
+                        </div>   
+                        <div class="filter-container">
+                            <div class="text-filter">Price (SGD)</div>
+                            <div class="filter">
+                                <div id="price-range" class="nstSlider" data-range_min="500" data-range_max="3000"
+                                     data-cur_min="500" data-cur_max="3000">
+                                    <div class="bar"></div>
+                                    <div class="leftGrip"></div>
+                                    <div class="rightGrip"></div>
+                                </div>
+                                <div class="leftLabel"></div>
+                                <div class="rightLabel"></div>
+                            </div>
+                        </div>             
+                    </div>
+
+                    
+                    
+                                 
+                </div>
+              
+
+                <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mycol">
                         <div class="angel-container">
                             <div class="img-thumb">
@@ -26,12 +142,10 @@
                             </div>
                             <div class="angel-name">
                                 <div class="a-name">Shu Qui</div>
-                                @*<div class="a-old">19 yrs</div>
-                                <div class="a-inter">Korea</div>*@
                             </div>
                             <div class="angel-pick">
                                 <button class="btn btn-danger">Pick</button>
-                                <button class="btn btn-default">View</button>
+                                <a href="/Home/AngelInfor" style="text-transform:none" class="btn btn-default">View</a>
   
                             </div>
                         </div>
@@ -44,12 +158,10 @@
                             </div>
                             <div class="angel-name">
                                 <div class="a-name">Shu Qui</div>
-                                @*<div class="a-old">19 yrs</div>
-                    <div class="a-inter">Korea</div>*@
                             </div>
                             <div class="angel-pick">
                                 <button class="btn btn-danger">Pick</button>
-                                <button class="btn btn-default">View</button>
+                                <a href="/Home/AngelInfor" style="text-transform:none" class="btn btn-default">View</a>
 
                             </div>
                         </div>
@@ -62,12 +174,10 @@
                             </div>
                             <div class="angel-name">
                                 <div class="a-name">Shu Qui</div>
-                                @*<div class="a-old">19 yrs</div>
-                    <div class="a-inter">Korea</div>*@
                             </div>
                             <div class="angel-pick">
                                 <button class="btn btn-danger">Pick</button>
-                                <button class="btn btn-default">View</button>
+                                <a href="/Home/AngelInfor" style="text-transform:none" class="btn btn-default">View</a>
 
                             </div>
                         </div>
@@ -80,18 +190,20 @@
                             </div>
                             <div class="angel-name">
                                 <div class="a-name">Shu Qui</div>
-                                @*<div class="a-old">19 yrs</div>
-                    <div class="a-inter">Korea</div>*@
                             </div>
                             <div class="angel-pick">
                                 <button class="btn btn-danger">Pick</button>
-                                <button class="btn btn-default">View</button>
+                                <a href="/Home/AngelInfor" style="text-transform:none" class="btn btn-default">View</a>
 
                             </div>
                         </div>
 
                     </div>
                 </div>
+                <div style="text-align:right">
+                    <a href="#" style="font-size:16px">Want More girls</a>
+                </div>
+               
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="cart-container">
@@ -105,13 +217,13 @@
                         <div class="feature-val" style="min-height:35px;">
                             <div class="date-picker">From <input type="date" /></div>
                             <div class="date-picker">To <input type="date" /></div>
-                        </div>                     
+                        </div>
                     </div>
                     <div class="line-feature">
                         <span class="fa-icon" title="Girls">
                             <div class="out-icon">
                                 <img style="width:100%;" src="~/imgs/girl.png" />
-                            </div>                          
+                            </div>
                         </span>
                         <div class="feature-val">
                             <span>Shu Qui</span>, <span>Angel Eliza</span>, <span>Hana Emi</span>, <span>Shu Qui</span>, <span>Angel Eliza</span>, <span>Hana Emi</span>
@@ -123,25 +235,34 @@
                         <div class="line-feature">
                             <span class="fa-icon" title="Limousine"><i class="fa fa-fw fa-car" aria-hidden="true"></i> Limousine</span>
                             <div class="feature-val">
-                                <span class="checkboxtext"><input type="checkbox" /></span>
+                                <label style="width:100%">
+                                    <span class="checkboxtext"><input type="checkbox" /></span>
+                                </label>
                             </div>
                         </div>
                         <div class="line-feature">
                             <span class="fa-icon" title="Hotel"><i class="fa fa-fw fa-bed" aria-hidden="true"></i> Hotel</span>
                             <div class="feature-val">
-                                <span class="checkboxtext"><input type="checkbox" /></span>
+                                <label style="width:100%">
+                                    <span class="checkboxtext"><input type="checkbox" /></span>
+                                </label>
+
                             </div>
                         </div>
                         <div class="line-feature">
                             <span class="fa-icon" title="Party"><i class="fa fa-fw fa-glass" aria-hidden="true"></i> Party</span>
                             <div class="feature-val">
-                                <span class="checkboxtext"><input type="checkbox" /></span>
+                                <label style="width:100%">
+                                    <span class="checkboxtext"><input type="checkbox" /></span>
+                                </label>
                             </div>
                         </div>
                         <div class="line-feature">
                             <span class="fa-icon" title="Casino"><i class="fa fa-fw fa-diamond" aria-hidden="true"></i> Casino</span>
                             <div class="feature-val">
-                                <span class="checkboxtext"><input type="checkbox" /></span>
+                                <label style="width:100%">
+                                    <span class="checkboxtext"><input type="checkbox" /></span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -151,6 +272,12 @@
                         <div class="feature-val">
                             <span class="total text-success">3.000</span>
                         </div>
+
+                        <div style="text-align:center">
+                            <h3>Call us for more information</h3>
+                            <h3>+08 9841 86349</h3>
+                        </div>
+
                     </div>
 
 
@@ -167,7 +294,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="row">
         <div class="bot-banner">
-            <div class="h2">Enjoy your best night in Singpore</div>
+            <div class="h2 conthrax-font">Enjoy your best night in Singpore</div>
         </div>
         
     </div>
@@ -175,4 +302,22 @@
 
 
 
+<div id="page4" class="full-page section dark-bg col-lg-12 col-md-12 col-sm-12 col-xs-12" style="position:relative">
+    <div id="contact" style="text-align:center;">
+        <h2>Call us now +65 8231 2312</h2>
+        <h2>Or leave your message</h2>
+        <div>
+            <textarea style="font-size: 16px;
+						color: black;
+						width: 354px;" rows="5"></textarea>
+        </div>
+        <button class="btn btn-primary" style="margin-top:10px; font-size:18px">Submit</button>
+    </div>
 
+
+</div>
+
+
+<script src="~/Scripts/jquery.nstSlider.js"></script>
+
+<script src="~/Scripts/list.js"></script>

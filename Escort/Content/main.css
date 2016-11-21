@@ -5,7 +5,10 @@
  html {
             overflow-x: hidden;
         }
-
+ .filter-active,  .filter-active:focus{
+     background-color:#5a5a5a;
+     color:#fff;
+ }
         body {
             margin: 0;
             padding: 0;
@@ -16,12 +19,93 @@
             left: 0;
             position: absolute;
         }
+        .filter-container{
+            position:relative;
+            padding-left:135px;
+            background-color:#fff;
+        }
+        .filter{
+            background-color:#fff;
+            padding:10px;
+            position:relative;
+            padding-left:70px;
+            padding-right:70px;
+        }
+        .filter select{
+            color: #5a5a5a;
+        }
+        .text-filter{
+            position:absolute;
+            font-size:12px;
+            left:15px;
+            top:8px;
+            color: #5a5a5a;
+            text-transform:uppercase;
+        }
+        .indicator-contain{
+            padding-left:15px;
+            position:relative;
+        }
+        .indicator-contain .indicator{
+            position:absolute;
+            left:0px;
+            top:0px;
+            color:#5a5a5a;
+        }
+         .indicator-contain .ind-value{
+             width:40px;
+             font-size:13px;
+             height:20px;
+             color:#5a5a5a;
+             text-align:center;
+        }
+        .nstSlider .bar{
+            background:#5b5a5a !important;
+            top:0px !important;
+            height:9px !important;
+        }
+        .nstSlider .rightGrip, .nstSlider .leftGrip{
+            background:#5b5a5a !important;
+            height:15px !important;
+            width:15px !important;
+            bottom:-2px;
+        }
+        .nstSlider{
+            width:100% !important;
+            height:10px !important;
+            background: #eee !important;
+        }
+        .leftLabel{
+            position:absolute;
+            left:15px;
+            top:6px;
+            font-size:14px;
+            color:#5a5a5a;
+        }
+        .rightLabel{
+            right:15px;
+            position:absolute;
+           top:6px;
+            font-size:14px;
+            color:#5a5a5a;
+        }
+
 @font-face {
     font-family: 'Roboto';
     src: url('/fonts/Roboto-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'conthrax';
+    src: url('/fonts/conthrax-sb.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+.conthrax-font{
+    font-family: conthrax;
+}
+
 .no-padding{
     padding:0px !important;
 }
@@ -231,6 +315,14 @@ video::-webkit-media-controls {
     .h3{
     font-size:24px;
 }
+
+
+
+
+}
+
+
+
 .top-banner2{
     height:400px;
     background-image:url('/imgs/topbanner2.jpg');
@@ -348,6 +440,7 @@ video::-webkit-media-controls {
 .cart-container .feature-val{
     text-align:right;
     font-size:15px;
+    width:100%;
 }
 .cart-container .feature-val .date-picker{
     width:100%;
@@ -399,13 +492,6 @@ video::-webkit-media-controls {
     width: 50px !important;
     color: #9d9d9d;
 }
-
-
-
-
-
-}
-
 
 
 .pick-color{

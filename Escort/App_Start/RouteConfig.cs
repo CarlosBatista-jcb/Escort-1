@@ -17,6 +17,8 @@ namespace Escort
             routes.MapRoute("LoginPage", "sign-in",
         new { controller = "Home", action = "LoginPage" });
 
+            routes.MapRoute("Angels", "angels",
+     new { controller = "Home", action = "Angels" });
 
 
             routes.MapRoute("AdminManage", "admin",
